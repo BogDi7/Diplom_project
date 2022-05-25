@@ -47,3 +47,5 @@ update==0.0.1
 urllib3==1.26.9
 whitenoise==6.1.0
 wrapt==1.14.1
+
+python-dotenv~=0.20.0

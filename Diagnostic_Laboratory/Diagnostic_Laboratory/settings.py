@@ -12,7 +12,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
-from my_folder.secret_key import *
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
+
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
