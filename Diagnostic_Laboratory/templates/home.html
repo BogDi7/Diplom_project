@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная | Диагностика{% endblock %}
+
+{% block content %}
+
+<div class="header-image">
+    <div class="container">
+        <div class="header-content">
+            <h1>Анализы и тесты</h1>
+            <h2>бронирование</h2>
+            <h5>закажи любой анализ</h5>
+
+            <a href="#welcome" class="btn"> приступай <i class="fa fa-arrow-right pl-2"></i> </a>
+        </div>
+    </div>
+</div>
+
+<div class="welcome container text-dark" id="welcome">
+
+    <!-- search -->
+    <div class="search-box bg-success p- my-4">
+
+        <div class="container">
+            <h3 class="text-white mb-">Поиск анализов</h3>
+
+            <form class="search" action="" method="GET">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" name='q' placeholder="type any test's name..."
+                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary" class="searchButton">
+                            НАЙТИ
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+    <h3 class="text-uppercase mt-3">Все анализы</h3>
+    <hr>
+    <!-- all medicine_tests -->
+    <div class="row mt-4">
+        {% for test in all_tests_paginator_data %}
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card test-box">
+                <div class="card-title">
+                    <img src="{{ test.image.url }}" class="card-img-top" alt="..." width="100%">
+                </div>
+
+                <div class="card-body pb-0">
+                    <p class="card-subtitle mb-2 text-muted">{{ test.category }}</p>
+
+                    <h6 class="">
+                        <a href="{% url 'medicine_tests:test-details' test.id %}">{{ test.test_name }}</a>
+                    </h6>
+
+                    <p class="card-text">{{ test.center }}</p>
+                    <p class="card-text text-dange price">Скидка: <span id="price">BYN {{ test.discount }}</span></p>
+                    <p class="card-text text-dange price">Цена без скидки: <span id="price">BYN {{ test.price }}</span></p>
+                    <!-- <p class="card-text">{{ test.active_status }}</p> -->
+
+                    <a class="btn btn-sm btn btn-success text-center" href="{% url 'medicine_tests:order' test.id %}">
+                        Заказ
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                {% if all_tests_paginator_data.has_previous %}
+                <a class="page-link" href="?page=1" aria-label="Previous">
+                    <span aria-hidden="false">&laquo;</span>
+                </a>
+                {% endif %}
+
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">Страница {{ all_tests_paginator_data.number }} of
+                    {{ all_tests_paginator_data.paginator.num_pages }}</a>
+            </li>
+            <li class="page-item">
+                {% if all_tests_paginator_data.has_next %}
+                <a class="page-link" href="?page={{ all_tests_paginator_data.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+
+{% endblock content %}

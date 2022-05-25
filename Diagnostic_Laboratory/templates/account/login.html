@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block title %}Sign In | Диагностика{% endblock %}
+
+{% block content %}
+
+
+<div class="box login-bg">
+
+	<div class="container">
+
+
+		<div class="card log-box">
+
+
+			<div class="card-body pb-">
+
+				<h3>{% trans "Sign In" %}</h3>
+
+				<!-- SignUp form -->
+				<form class="login mt-4" method="POST" action="{% url 'account_login' %}">
+					{% csrf_token %}
+					{{ form.as_p }}
+
+					{% if redirect_field_value %}
+					<input type="hidden" class="form-control" name="{{ redirect_field_name }}"
+						value="{{ redirect_field_value }}" />
+					{% endif %}
+
+					<button class="btn w-100 my-4 login-btn primaryAction" type="submit"
+						style="width: 80%">{% trans "Sign In" %}</button>
+				</form>
+				<!-- SignUp form end -->
+
+				<!-- Google_login and Not_Registered_Yet? section -->
+				{% get_providers as socialaccount_providers %}
+
+				{% if socialaccount_providers %}
+
+				<div class="boxx2 text-center">
+					<span>
+						{% blocktrans with site.name as site_name %}
+						<strong>Not a member?</strong>
+						<a href="{{ signup_url }}">Create new account</a>
+						{% endblocktrans %}
+					</span>
+				</div>
+				{% else %}
+				<div class="box">
+					{% blocktrans %}
+					<a href="{{ signup_url }}">Create new account</a> first.
+					{% endblocktrans %}
+				</div>
+				{% endif %}
+
+
+			</div>
+
+
+		</div>
+
+		<!-- </div>
+		</div> -->
+	</div>
+
+</div>
+
+{% endblock %}
+
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Сведения о подтверждённом заказе | Диагностика</title>
+</head>
+
+<body>
+    <h1>Сведения о подтверждённом заказе</h1>
+    <hr>
+    <h3 style="color: orangered">История заказа: <a href="{% url 'medicine_tests:confirm-payment-message' valid_order.id %}">
+        {{ valid_order.id }}</a>
+    </h3>
+    <hr>
+
+    <h3>Подтверждено персоналом: <b style="color: blue">{{ valid_order.confirmed_by_staff }}</b></h3>
+    <h3>Состояние оплаты: <b style="color: blue">{{ valid_order.payment_status }}</b></h3>
+    <h3>Время подтверждения: <b style="color: blue">{{ valid_order.confirmation_datetime }}</b></h3>
+    <hr>
+
+    <h3>Клиент: <b style="color: blue">{{ this_client }}</b></h3>
+    <h3>Анализ: <b style="color: blue">{{ this_test }}</b></h3>
+    <hr>
+
+    <button class="btn btn-success" style="width: 10%" type="submit">Загрузить результат</button>
+    <button class="btn btn-primary" style="width: 10%" type="submit">Отправить результат</button>
+
+</body>
+</html>

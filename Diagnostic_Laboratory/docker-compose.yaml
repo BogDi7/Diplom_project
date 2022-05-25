@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  laba:
+    build: .
+    container_name: laba
+    hostname: laba
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - "SECRET_KEY:${SECRET_KEY}"

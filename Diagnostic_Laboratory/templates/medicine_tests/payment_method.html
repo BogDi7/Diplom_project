@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %} Подтверждение оплаты {% endblock %}
+{% block content %}
+
+<style>
+    .box {
+        min-height: 480px;
+    }
+
+    .card-body {
+        /* min-height: 200px; */
+    }
+</style>
+
+
+<div class="container box">
+
+    <div class="row my-5">
+        <div class="col-6 offset-3 text-cente">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Выберите метод оплаты</h3>
+                </div>
+
+                <div class="card-body py-5">
+                    <select>
+                        <option value="volvo">Наличные</option>
+                        <option value="saab">Кредитная карта</option>
+                        <option value="saab">Мед. страховка</option>
+
+                    </select>
+                    <br>
+                    <br>
+                    <a href="{% url 'medicine_tests:confirm-payment-message' id=order_details.id %}">
+                        <button type="button" class="btn btn-success">Подтвердить</button>
+                    </a>
+
+                    <a href="{% url 'medicine_tests:order-details' id=order_details.id %}">
+                        <button type="button" class="btn btn-danger">Отмена</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

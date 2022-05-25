@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Медицинский центр | Диагностика{% endblock %}
+
+{% block content %}
+
+
+<div class="inner-content">
+    <div class="container">
+
+        <!-- all tests -->
+        <div class="row">
+            {% for test in tests_by_center %}
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card test-box">
+                    <div class="card-title">
+                        <img src="{{ test.image.url }}" class="card-img-top" alt="..." width="100%">
+                    </div>
+
+                    <div class="card-body">
+                        <p class="card-subtitle mb-2 text-muted">{{ test.category }}</p>
+
+                        <h6 class="">
+                            <a href="{% url 'medicine_tests:test-details' test.id %}">{{ test.test_name }}</a>
+                        </h6>
+
+                        <p class="card-text">{{ test.center }}</p>
+
+
+                        <p class="card-text text-dange price">Цена: <span id="price">{{ test.price }}</span></p>
+                        <!-- <p class="card-text">{{ test.active_status }}</p> -->
+
+                        <a class="btn btn-sm btn btn-success text-center" href="{% url 'medicine_tests:order' test.id %}"
+                            type="submit">
+                            Заказ
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+
+        <!-- {% for test in tests_by_center %}
+
+
+        {% endfor %}
+        <br> -->
+    </div>
+
+</div>
+
+{% endblock %}
